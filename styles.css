@@ -606,16 +606,48 @@ body {
 @media print {
   body { background: white; }
   .toolbar { display: none !important; }
-  .book-container { margin-top: 0; padding: 0; gap: 0; }
+  .book-container {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
   .page {
-    width: 210mm;
-    height: 297mm;
-    box-shadow: none;
-    page-break-after: always;
-    break-after: page;
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
     margin: 0 !important;
     border: none !important;
+    overflow: hidden !important;
   }
+  .cover, .closing {
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+  }
+  .grid {
+    overflow: hidden !important;
+    flex: 1 !important;
+  }
+  .grid3 {
+    overflow: hidden !important;
+    flex: 1 !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: 1fr !important;
+    align-content: stretch !important;
+  }
+  .pcard3 .photo3 {
+    height: 240px !important;
+    aspect-ratio: unset !important;
+  }
+  .pcard .photo {
+    max-height: 310px !important;
+    aspect-ratio: 4/5 !important;
+  }
+  .pcard3 { height: 100% !important; }
 }
 @page { size: A4; margin: 0; }
 
