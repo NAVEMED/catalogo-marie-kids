@@ -618,3 +618,30 @@ body {
   }
 }
 @page { size: A4; margin: 0; }
+
+/* ===== RESPONSIVE MÓVIL ===== */
+@media (max-width: 768px) {
+    body {
+        zoom: 1;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .catalogo, 
+    .grid, 
+    .productos, 
+    .container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
+    img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
