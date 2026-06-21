@@ -602,7 +602,7 @@ body {
   text-transform: uppercase;
 }
 
-/* ===== PRINT — fuerza A4 exacto, cancela responsive ===== */
+/* ===== PRINT ===== */
 @media print {
   body { background: white; }
   .toolbar { display: none !important; }
@@ -627,47 +627,49 @@ body {
     height: 297mm !important;
     min-height: 297mm !important;
     max-height: 297mm !important;
-    overflow: hidden !important;
   }
   .grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 10px 14px !important;
-    flex: 1 !important;
     overflow: hidden !important;
+    flex: 1 !important;
   }
   .grid3 {
-    display: grid !important;
+    overflow: hidden !important;
+    flex: 1 !important;
     grid-template-columns: repeat(3, 1fr) !important;
     grid-auto-rows: 1fr !important;
-    gap: 7px !important;
-    padding: 8px 12px !important;
-    flex: 1 !important;
-    overflow: hidden !important;
     align-content: stretch !important;
   }
-  .grid4 { grid-template-columns: repeat(4, 1fr) !important; }
-  .pcard { height: auto !important; }
-  .pcard .photo { aspect-ratio: 4/5 !important; max-height: 310px !important; }
-  .pcard .photo img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
-  .pcard .pname { font-size: 13px !important; }
-  .pcard .pprice { font-size: 17px !important; }
+  .pcard3 .photo3 {
+    height: 240px !important;
+    aspect-ratio: unset !important;
+  }
+  .pcard .photo {
+    max-height: 310px !important;
+    aspect-ratio: 4/5 !important;
+  }
   .pcard3 { height: 100% !important; }
-  .pcard3 .photo3 { height: 240px !important; aspect-ratio: unset !important; }
-  .pcard3 .photo3 img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
-  .pcard3 .pname3 { font-size: 11.5px !important; }
-  .pcard3 .pprice3 { font-size: 15px !important; }
-  .cat-title { font-size: 18px !important; }
-  .steps { flex-wrap: nowrap !important; }
-  .contact-box { flex-direction: row !important; }
-  .closing h2 { font-size: 28px !important; }
 }
 @page { size: A4; margin: 0; }
 
-/* ===== RESPONSIVE MÓVIL ===== */
+
+
+/* ===== RESPONSIVE MÓVIL CORREGIDO ===== */
 @media (max-width: 768px) {
 
+  /* Escalar toda la página al ancho del celular */
+  .book-container {
+    padding: 8px 4px 24px !important;
+    margin-top: 56px !important;
+  }
+
+  .page {
+    width: 100vw !important;
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+  }
+
+  /* Toolbar compacta */
   .toolbar {
     padding: 6px 12px !important;
     flex-wrap: wrap !important;
@@ -675,92 +677,76 @@ body {
   .toolbar-hint { display: none !important; }
   .toolbar-brand { font-size: 12px !important; }
 
-  .book-container {
-    padding: 8px 4px 24px !important;
-    margin-top: 52px !important;
-  }
-
-  /* Cada página se escala al ancho del celular */
-  .page {
-    width: 100vw !important;
-    height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
-    overflow: visible !important;
-  }
-
-  .cover, .closing {
-    height: auto !important;
-    min-height: unset !important;
-    overflow: visible !important;
-  }
-
-  /* Grids: 2 columnas en móvil */
+  /* Grids adaptados */
   .grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-    padding: 6px !important;
+    gap: 7px !important;
+    padding: 8px !important;
     overflow: visible !important;
     flex: unset !important;
   }
+
   .grid3 {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-    padding: 6px !important;
+    gap: 7px !important;
+    padding: 8px !important;
     overflow: visible !important;
     flex: unset !important;
     grid-auto-rows: auto !important;
     align-content: unset !important;
   }
+
   .grid4 {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
   }
 
-  /* Tarjetas 2 col */
-  .pcard { height: auto !important; }
+  /* Tarjetas 2 columnas */
+  .pcard {
+    height: auto !important;
+  }
   .pcard .photo {
     aspect-ratio: 3/4 !important;
     max-height: unset !important;
   }
-  .pcard .photo img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
-  .pcard .info { padding: 6px 8px 8px !important; }
-  .pcard .pname { font-size: 10px !important; line-height: 1.2 !important; }
-  .pcard .pmeta { font-size: 8px !important; }
-  .pcard .pprice { font-size: 13px !important; }
-  .pcard .ptalla { font-size: 7px !important; padding: 2px 6px !important; }
+  .pcard .photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .pcard .pname { font-size: 11px !important; }
+  .pcard .pmeta { font-size: 9px !important; }
+  .pcard .pprice { font-size: 14px !important; }
 
-  /* Tarjetas 3 col (se convierten en 2) */
-  .pcard3 { height: auto !important; }
+  /* Tarjetas 3 columnas */
+  .pcard3 {
+    height: auto !important;
+  }
   .pcard3 .photo3 {
     height: auto !important;
     aspect-ratio: 3/4 !important;
-    width: 100% !important;
   }
-  .pcard3 .photo3 img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
-  .pcard3 .info3 { padding: 5px 7px 7px !important; }
+  .pcard3 .photo3 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
   .pcard3 .pname3 { font-size: 10px !important; }
   .pcard3 .pmeta3 { font-size: 8px !important; }
   .pcard3 .pprice3 { font-size: 13px !important; }
-  .pcard3 .ptalla3 { font-size: 7px !important; }
 
-  /* Header categoría */
-  .cat-header { padding: 8px 12px 6px !important; }
-  .cat-title { font-size: 14px !important; }
-  .cat-sub, .cat-eyebrow, .cat-code { font-size: 7px !important; }
+  /* Cover portada */
+  .cover, .closing {
+    height: auto !important;
+    min-height: 100vh !important;
+  }
 
-  /* Cover */
-  .cover-inner { padding: 16px 12px 0 !important; }
-  .cover-tagline { font-size: 10px !important; }
-  .cover-contact { font-size: 7px !important; }
+  /* Textos del header de categoría */
+  .cat-title { font-size: 15px !important; }
+  .cat-sub, .cat-eyebrow, .cat-code { font-size: 8px !important; }
 
-  /* Closing */
-  .closing-inner { padding: 20px 20px 0 !important; }
-  .closing h2 { font-size: 18px !important; }
-  .closing .lede { font-size: 9px !important; }
-  .steps { flex-wrap: wrap !important; gap: 10px !important; }
-  .contact-box { flex-direction: column !important; align-items: center !important; gap: 8px !important; }
-  .contact-col { min-width: 80px !important; padding: 8px 12px !important; }
-  .social-stickers { gap: 10px !important; }
-  .sticker svg { width: 40px !important; height: 40px !important; }
+  /* Closing page */
+  .steps { flex-wrap: wrap !important; gap: 12px !important; }
+  .contact-box { flex-direction: column !important; align-items: center !important; }
+  .closing h2 { font-size: 20px !important; }
+  .closing .lede { font-size: 10px !important; }
 }
