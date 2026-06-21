@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marie Kids · Catálogo de Moda Infantil Importada</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blush:    #F2D9D9;
+    --rose:     #C97B84;
+    --rose-dark:#A5545E;
+    --cream:    #FDF8F4;
+    --warm:     #EDE3D8;
+    --ink:      #2C2018;
+    --muted:    #7A6658;
+    --white:    #FFFFFF;
+    --sold:     #D64040;
+    --page-w:   210mm;
+    --page-h:   297mm;
+  }
+
+  body {
+    background: #D0C4BC;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== TOOLBAR ===== */
+  .toolbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    gap: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .toolbar-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--blush);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+  .toolbar-actions { display: flex; gap: 10px; align-items: center; }
+  .btn-pdf {
+    background: var(--rose);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.2s;
+  }
+  .btn-pdf:hover { background: var(--rose-dark); }
+  .btn-pdf svg { width: 15px; height: 15px; }
+  .toolbar-hint {
+    font-size: 12px;
+    color: #9e8f88;
+  }
+
+  /* ===== BOOK WRAPPER ===== */
+  .book-container {
+    margin-top: 56px;
+    padding: 32px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* ===== PAGE ===== */
+  .page {
+    width: var(--page-w);
+    min-height: var(--page-h);
+    background: var(--cream);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+    page-break-after: always;
+    break-after: page;
+  }
+  .page + .page {
+    margin-top: 6px;
+    border-top: 3px solid #b8a89a;
+  }
+
+  /* ===== PAGE FOOTER ===== */
+  .pagefoot {
+    margin-top: auto;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--warm);
+  }
+  .pagefoot .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--rose);
+    font-weight: 600;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    background: var(--ink);
+    color: var(--white);
+    min-height: var(--page-h);
+  }
+  .cover-band {
+    height: 6px;
+    background: linear-gradient(90deg, var(--rose) 0%, var(--blush) 60%, var(--rose-dark) 100%);
+  }
+  .cover-inner {
+    padding: 28px 28px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .logo-wrap img {
+    height: 64px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    display: block;
+    margin: 0 auto;
+  }
+  .cover-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: #c4b0aa;
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    font-style: italic;
+  }
+  .cover-pill {
+    display: inline-block;
+    background: var(--rose);
+    color: white;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .cover-photos {
+    margin-top: 22px;
+    width: 100%;
+    padding: 0 10px;
+  }
+  .grid4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .cover-thumb {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .cover-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cover-contact {
+    text-align: center;
+    font-size: 9px;
+    color: #9e8f88;
+    margin-top: 18px;
+    letter-spacing: 0.10em;
+    padding: 0 10px;
+  }
+  .cover-contact .sep { margin: 0 6px; color: var(--rose); }
+  .cover .pagefoot {
+    color: #7a6e6a;
+    border-top-color: rgba(255,255,255,0.08);
+  }
+  .cover .pagefoot .num { color: var(--rose); }
+
+  /* ===== CATEGORY HEADER ===== */
+  .cat-header {
+    padding: 22px 24px 14px;
+    border-bottom: 2px solid var(--warm);
+    background: linear-gradient(135deg, var(--cream) 0%, #f7ede6 100%);
+    position: relative;
+  }
+  .cat-header::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, var(--rose) 0%, var(--blush) 100%);
+    border-radius: 0 3px 3px 0;
+  }
+  .cat-code {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    padding-left: 14px;
+  }
+  .cat-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-left: 14px;
+  }
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-top: 3px;
+    padding-left: 14px;
+  }
+  .cat-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    padding-left: 14px;
+  }
+
+  /* ===== PRODUCT GRIDS ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 16px 20px;
+    flex: 1;
+  }
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 12px 16px;
+    flex: 1;
+  }
+
+  /* ===== PRODUCT CARD (2-col) ===== */
+  .pcard {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ede3d8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+  .pcard .photo {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--warm);
+  }
+  .pcard .photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .pcard .info {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pcard .pname {
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .pcard .pmeta {
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .pcard .prow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+  }
+  .pcard .ptalla {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.10em;
+    color: var(--rose);
+    background: var(--blush);
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .pcard .pprice-from { font-size: 8.5px; color: var(--muted); }
+  .pcard .pprice {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--rose-dark);
+  }
+  .pcard .pprice.sold {
+    color: var(--sold);
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== PRODUCT CARD (3-col) ===== */
+  .pcard3 {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ede3d8;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  }
+  .pcard3 .photo3 {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--warm);
+  }
+  .pcard3 .photo3 img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pcard3 .info3 {
+    padding: 7px 9px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .pcard3 .pname3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .pcard3 .pmeta3 {
+    font-size: 8px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .pcard3 .prow3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .pcard3 .ptalla3 {
+    font-size: 7.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--rose);
+    background: var(--blush);
+    padding: 2px 6px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  .pcard3 .pprice-from3 { font-size: 7.5px; color: var(--muted); }
+  .pcard3 .pprice3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--rose-dark);
+  }
+  .pcard3 .pprice3.sold {
+    color: var(--sold);
+    font-size: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== CLOSING PAGE ===== */
+  .closing {
+    background: var(--ink);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 52px 40px 24px;
+    text-align: center;
+  }
+  .closing h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--blush);
+    margin-bottom: 10px;
+  }
+  .closing .lede {
+    font-size: 12px;
+    color: #c4b0aa;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto 32px;
+  }
+  .steps {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .step .num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+  }
+  .step .stitle {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--blush);
+  }
+  .step .sdesc {
+    font-size: 10px;
+    color: #9e8f88;
+    max-width: 90px;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .contact-box {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .contact-col {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    padding: 14px 20px;
+    min-width: 110px;
+  }
+  .contact-col h4 {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .contact-col p {
+    font-size: 11px;
+    color: #e8ddd8;
+  }
+  .note-box {
+    background: rgba(201,123,132,0.12);
+    border-left: 3px solid var(--rose);
+    border-radius: 6px;
+    padding: 12px 18px;
+    font-size: 10px;
+    color: #b0a09a;
+    line-height: 1.5;
+    text-align: left;
+    max-width: 420px;
+    margin-bottom: 20px;
+  }
+  .closing .pagefoot {
+    color: #7a6e6a;
+    border-top-color: rgba(255,255,255,0.08);
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; }
+    .toolbar { display: none !important; }
+    .book-container { margin-top: 0; padding: 0; gap: 0; }
+    .page {
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+      margin: 0 !important;
+      border: none !important;
+    }
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-brand">Marie Kids · Catálogo</div>
+  <div class="toolbar-actions">
+    <span class="toolbar-hint">Vista libro A4</span>
+    <button class="btn-pdf" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      Exportar PDF
+    </button>
+  </div>
+</div>
+
+<div class="book-container">
+
+<!-- ============ PAGE 1 — PORTADA ============ -->
+<div class="page cover">
+  <div class="cover-band"></div>
+  <div class="cover-inner">
+    <div class="logo-wrap"><img src="img/logo.png" alt="Marie Kids logo"></div>
+    <div class="cover-tagline">Moda infantil con estilo, comodidad y mucho amor</div>
+    <div class="cover-pill"><span>Catálogo de Productos</span></div>
+    <div class="cover-photos">
+      <div class="grid4">
+        <div class="cover-thumb"><img src="img/chompa_monstruos.jpg" alt="Chompa Monstruos"></div>
+        <div class="cover-thumb"><img src="img/chompa_rayas.jpg" alt="Chompa Rayas"></div>
+        <div class="cover-thumb"><img src="img/chompa_dino.jpg" alt="Chompa Dinosaurios"></div>
+        <div class="cover-thumb"><img src="img/cardigan_fresa.jpg" alt="Cárdigan Fresa"></div>
+      </div>
+    </div>
+    <div class="cover-contact">WhatsApp 930 419 029 <span class="sep">·</span> Facebook MarieKids.peru <span class="sep">·</span> Instagram &amp; TikTok @mariekids.oficial</div>
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">01</span></div>
+</div>
+
+<!-- ============ PAGE 2 — CHOMPAS TALLA 12M ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 90</div>
+    <div class="cat-eyebrow">Colección Chompas</div>
+    <div class="cat-title">Chompas niño / niña</div>
+    <div class="cat-sub">Tejido suave y abrigador, diseños importados · Talla 12 meses</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="pcard">
+      <div class="photo"><img src="img/talla 90/chompa_monstruos.jpg" alt="Chompa Cárdigan Monstruos"></div>
+      <div class="info">
+        <div class="pname">Chompa Cárdigan "Monstruos"</div>
+        <div class="pmeta">Cárdigan a botones con adorables parches de monstruos de colores. Tejido grueso y abrigador, ideal para los días fríos. Diseño divertido y unisex que encantará a los más pequeños.</div>
+        <div class="prow">
+          <span class="ptalla">Talla 12 meses</span>
+          <span><span class="pprice-from">Desde </span><span class="pprice">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="photo"><img src="img/talla 90/chompa_rayas.jpg" alt="Chompa Rayas Café"></div>
+      <div class="info">
+        <div class="pname">Chompa Rayas Café</div>
+        <div class="pmeta">Cuello redondo con rayas en tonos marrón y crema en tejido afelpado premium. Elegante y cálida, perfecta para combinar con cualquier outfit de la temporada.</div>
+        <div class="prow">
+          <span class="ptalla">Talla 12 meses</span>
+          <span><span class="pprice-from">Desde </span><span class="pprice">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="photo"><img src="img/talla 90/chompa_dino.jpg" alt="Chompa Dinosaurios"></div>
+      <div class="info">
+        <div class="pname">Chompa Dinosaurios</div>
+        <div class="pmeta">Encantador estampado de dinosaurios coloridos sobre tejido suave de cuello redondo. Diseño unisex lleno de personalidad, cómoda y abrigadora para el día a día.</div>
+        <div class="prow">
+          <span class="ptalla">Talla 12 meses</span>
+          <span><span class="pprice-from">Desde </span><span class="pprice">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="photo"><img src="img/talla 90/cardigan_fresa.jpg" alt="Cárdigan Fresas Rosado"></div>
+      <div class="info">
+        <div class="pname">Cárdigan Fresas Rosado</div>
+        <div class="pmeta">Cárdigan abierto en tejido suave con delicados bordados de fresas y borde ondulado. Un diseño dulce y femenino en tono rosado pastel, perfecto para las princesas del hogar.</div>
+        <div class="prow">
+          <span class="ptalla">Talla 12 meses</span>
+          <span><span class="pprice-from">Desde </span><span class="pprice">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">02</span></div>
+</div>
+
+<!-- ============ PAGE 3 — CÓD. 100 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 100</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 2 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/cardigan_corazones_cuadros.jpg" alt="Cárdigan Corazones Cuadros"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Corazones Cuadros</div>
+        <div class="pmeta3">Tejido a cuadros con corazones entretejidos, borde recto y botones delicados. Mezcla lo clásico con lo romántico.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/cardigan_diamantes_conejitos.jpg" alt="Cárdigan Diamantes y Conejitos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Diamantes y Conejitos</div>
+        <div class="pmeta3">Diseño jacquard con rombos y conejitos alternados. Tejido estructurado y suave, ideal para el frío con mucho estilo.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/sweater_corazones_crema.jpg" alt="Chompa Corazones Crema"></div>
+      <div class="info3">
+        <div class="pname3">Chompa Corazones Crema</div>
+        <div class="pmeta3">Suéter en tono crema con corazones bordados, tejido afelpado y cuello redondo. Elegante y acogedora.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">AGOTADO</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/cardigan_corazones_acuarela.jpg" alt="Cárdigan Corazones Acuarela"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Corazones Acuarela</div>
+        <div class="pmeta3">Cárdigan con estampado de corazones en degradado acuarela, tonos suaves y modernos. Ligero y muy femenino.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/cardigan_monos_rayas.jpg" alt="Cárdigan Moños y Rayas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Moños y Rayas</div>
+        <div class="pmeta3">Rayas horizontales con moños decorativos integrados al tejido. Diseño dulce y juguetón, perfecto para ocasiones especiales.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/cardigan_flamencos.jpg" alt="Cárdigan Flamencos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Flamencos</div>
+        <div class="pmeta3">Estampado tropical con flamencos rosados sobre tejido suave. Colorido, fresco y con personalidad propia.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/chompa_flores_margaritas.jpg" alt="Chompa Flores Margaritas"></div>
+      <div class="info3">
+        <div class="pname3">Chompa Flores Margaritas</div>
+        <div class="pmeta3">Tejido floral con margaritas en relieve sobre fondo suave. Fresco y primaveral, ideal para el día a día con mucho estilo.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/chompa_ositos_amarillo.jpg" alt="Chompa Ositos Amarillo"></div>
+      <div class="info3">
+        <div class="pname3">Chompa Ositos Amarillo</div>
+        <div class="pmeta3">Alegre suéter amarillo con ositos bordados. Tejido suave y cálido que aporta un toque de sol y ternura al look de tu niña.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 100/chompa_dino_pastel.jpg" alt="Chompa Dinosaurios Pastel"></div>
+      <div class="info3">
+        <div class="pname3">Chompa Dinosaurios Pastel</div>
+        <div class="pmeta3">Divertidos dinosaurios en tonos pastel sobre tejido suave. Diseño unisex adorable, abrigador y perfecto para los amantes de los dinos.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 2 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">03</span></div>
+</div>
+
+<!-- ============ PAGE 4 — CÓD. 110 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 110</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 3 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Aventuras sobre Ruedas.png" alt="Cárdigan Sobre Ruedas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Sobre Ruedas</div>
+        <div class="pmeta3">Estampado de autos y vehículos de colores sobre tejido suave. Divertido, unisex y lleno de energía para los pequeños aventureros.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Chompa Zigzag.png" alt="Cárdigan Zigzag"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Zigzag</div>
+        <div class="pmeta3">Patrón geométrico en zigzag tejido en tonos contrastantes. Diseño moderno y animado que aporta estilo y calidez al mismo tiempo.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Granja Encantada.png" alt="Cárdigan Granja Encantada"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Granja Encantada</div>
+        <div class="pmeta3">Tiernos animales de granja bordados sobre tejido abrigador. Vacas, ovejas y pollitos se mezclan en un diseño encantador que los niños adoran.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Cárdigan Diamantes y Conejitos.png" alt="Cárdigan Diamantes y Conejitos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Diamantes y Conejitos</div>
+        <div class="pmeta3">Diseño jacquard con rombos y conejitos alternados en tejido estructurado. Calidez y ternura en cada punto tejido.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/cardigan_fresa.png" alt="Cárdigan Fresa Rosa"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Fresa Rosa</div>
+        <div class="pmeta3">Delicado cárdigan rosado con estampado de fresas brillantes. Tejido suave y ligero, perfecto para el look dulce y primaveral.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Nuevo Floral.png" alt="Cárdigan Nuevo Floral"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Nuevo Floral</div>
+        <div class="pmeta3">Flores de temporada tejidas en relieve sobre fondo claro. Un cárdigan fresco, romántico y muy versátil para cualquier ocasión.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Osito Azul.png" alt="Cárdigan Ositos Azul"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Ositos Azul</div>
+        <div class="pmeta3">Suave tejido azul con adorables ositos bordados en contraste blanco. Cómodo, cálido y con mucho carisma para los días de frío.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/osito love blanca.png" alt="Cárdigan Ositos Blanca"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Ositos Blanca</div>
+        <div class="pmeta3">Tejido blanco prístino con ositos "love" en bordado delicado. Puro, romántico y sofisticado, ideal para looks especiales.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 110/Rosa con Estampado de Corazones.png" alt="Cárdigan Rosa con Corazones"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Rosa con Corazones</div>
+        <div class="pmeta3">Rosa intenso con corazones estampados a lo largo del tejido. Romántico y dulce, un favorito instantáneo para las más pequeñas.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 3 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">04</span></div>
+</div>
+
+<!-- ============ PAGE 5 — CÓD. 120 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 120</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña y niño</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 4 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/Estampado de dinosaurios coloridos.jpg" alt="Cárdigan Dinosaurios Coloridos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Dinosaurios Coloridos</div>
+        <div class="pmeta3">Explosión de dinosaurios multicolores sobre tejido suave. Divertido, unisex y muy dinámico, ideal para los pequeños exploradores.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/Cardigan estampado de camellos-01.png" alt="Cárdigan Estampado Camellos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Camellos del Desierto</div>
+        <div class="pmeta3">Camellos en fila sobre tejido de punto en tonos cálidos. Un diseño nórdico con carácter propio, abrigador y muy original.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/Cardigan estampado de camellos-02.jpg" alt="Cárdigan Camellos Versión 2"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Camellos Premium</div>
+        <div class="pmeta3">Segunda variante del icónico diseño de camellos con mayor contraste y detalle. Tejido grueso y cálido para los días más fríos.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/Azul Rayas Beige.png" alt="Cárdigan Azul Rayas Beige"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Azul Rayas Beige</div>
+        <div class="pmeta3">Rayas horizontales en azul y beige de tejido premium. Clásico, versátil y muy elegante para combinar con cualquier pantalón o falda.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/chompa de Punto jacquard floral.jpeg" alt="Cárdigan Jacquard Floral"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Jacquard Floral</div>
+        <div class="pmeta3">Tejido jacquard con motivos florales en relieve. Técnica artesanal que le da textura y sofisticación, ideal para look de ocasión.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/cárdigan punto estampado de fresas.jpg" alt="Cárdigan Estampado de Fresas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Estampado de Fresas</div>
+        <div class="pmeta3">Fresas maduras y brillantes sobre tejido de punto suave. Fresco, dulce y muy primaveral, un diseño que nunca pasa de moda.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 120/vestido de princesa, tejido de punto Azul polvo.png" alt="Cárdigan Vestido Princesa Azul Polvo"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Princesa Azul Polvo</div>
+        <div class="pmeta3">Silueta tipo vestido en tejido de punto azul polvo con detalles elegantes. Para las pequeñas princesas que quieren verse espectaculares.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 4 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">05</span></div>
+</div>
+
+<!-- ============ PAGE 6 — CÓD. 130 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 130</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 5 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/franjas horizontales tonos de azul y crema..jpg" alt="Cárdigan Franjas Azul y Crema"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Franjas Azul y Crema</div>
+        <div class="pmeta3">Franjas horizontales en azul y crema de tejido estructurado. Diseño náutico y clásico que combina con todo, muy elegante y abrigador.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/Cardigan fresas y corazones en tonos rosado.png" alt="Cárdigan Fresas y Corazones Rosado"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Fresas y Corazones Rosado</div>
+        <div class="pmeta3">Combinación encantadora de fresas y corazones en tonos rosados sobre tejido suave. Delicado, femenino y muy dulce.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/Estampado con figuras de vacas.png" alt="Cárdigan Figuras de Vacas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Figuras de Vacas</div>
+        <div class="pmeta3">Tiernas vacas manchadas repartidas sobre tejido blanco y negro. Un diseño campestre y original con mucho carácter y simpatía.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/estampado de corazones marrones.jpg" alt="Cárdigan Corazones Marrones"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Corazones Marrones</div>
+        <div class="pmeta3">Corazones en tono marrón cálido sobre tejido claro. Diseño sofisticado y otoñal, perfecto para los días de brisa y color café.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/Estampado de tulipanes en tonos naranja.jpg" alt="Cárdigan Tulipanes Naranja"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Tulipanes Naranja</div>
+        <div class="pmeta3">Tulipanes vibrantes en tonos naranja y coral sobre tejido suave. Alegre, floral y lleno de vida, ideal para look de temporada.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/estampado leopardo.png" alt="Cárdigan Estampado Leopardo"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Estampado Leopardo</div>
+        <div class="pmeta3">Animal print de leopardo en tonos cálidos sobre tejido suave y cómodo. Atrevido, moderno y con mucho estilo para las pequeñas fashionistas.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/tejida con detalles de fresas.png" alt="Cárdigan Detalles de Fresas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Detalles de Fresas</div>
+        <div class="pmeta3">Fresas tejidas en relieve dispersas sobre fondo neutro. Detalle artesanal y tridimensional que hace cada prenda única y especial.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 130/estampado de corazones.png" alt="Cárdigan Estampado de Corazones"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Estampado de Corazones</div>
+        <div class="pmeta3">Corazones dispersos en distintos tamaños sobre tejido de punto suave. Romántico y versátil, para llevar el amor en cada look.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 5 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">06</span></div>
+</div>
+
+<!-- ============ PAGE 7 — CÓD. 140 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 140</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 6 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/chompa_monstruos.jpg" alt="Cárdigan Estampado Monstruos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Estampado Monstruos</div>
+        <div class="pmeta3">Monstruitos de colores sobre tejido suave y grueso. Divertido y lleno de energía, perfecto para los niños con personalidad propia.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/franjas horizontales tonos de azul y crema.jpg" alt="Cárdigan Franjas Azul y Crema"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Franjas Azul y Crema</div>
+        <div class="pmeta3">Franjas horizontales en azul y crema de corte clásico y elegante. Tejido de calidad que combina con cualquier estilo de outfit.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/Chompa de Ositos beige.png" alt="Cárdigan Ositos Beige"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Ositos Beige</div>
+        <div class="pmeta3">Ositos tiernos estampados sobre tejido beige cálido y suave. Neutro, sofisticado y adorable, una prenda atemporal para tu colección.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/cardigan_diamantes_conejitos.jpeg" alt="Cárdigan Diamantes y Conejitos"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Diamantes y Conejitos</div>
+        <div class="pmeta3">Patrón jacquard con rombos y conejitos en tejido estructurado y abrigador. Diseño clásico nórdico con un toque infantil irresistible.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/cardigan_fresa.png" alt="Cárdigan Estampado Fresa"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Estampado Fresa</div>
+        <div class="pmeta3">Fresas rojizas y brillantes sobre tejido suave en tonos claros. Fresco, dulce y atemporal, siempre en tendencia en moda infantil.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/Chompa Colección Rojo.png" alt="Cárdigan Colección Rojo con Lazo"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Colección Rojo con Lazo</div>
+        <div class="pmeta3">Elegante cárdigan rojo intenso con lazo decorativo en el cuello. Sofisticado y festivo, ideal para reuniones y ocasiones especiales.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/chompa_dino_pastel.jpg" alt="Cárdigan Dino Pastel"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Dino Pastel</div>
+        <div class="pmeta3">Dinosaurios en tonos pastel suaves sobre tejido abrigador. Tierno, colorido y divertido, perfecto para los fans de los prehistóricos.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/Cárdigan rosa con corazones.png" alt="Cárdigan Rosa con Corazones"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Rosa con Corazones</div>
+        <div class="pmeta3">Tejido rosa suave con corazones estampados en toda la prenda. Romántico, femenino y muy coqueto para el día a día.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/Estampado de fresas y flores.png" alt="Cárdigan Fresas y Flores"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Fresas y Flores</div>
+        <div class="pmeta3">Combinación floral de fresas y flores silvestres sobre tejido rosa suave. Primaveral, alegre y con mucho encanto natural.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">07</span></div>
+</div>
+
+<!-- ============ PAGE 8 — CÓD. 150 ============ -->
+<div class="page">
+  <div class="cat-header">
+    <div class="cat-code">Cód. 150</div>
+    <div class="cat-eyebrow">Colección Cárdigans</div>
+    <div class="cat-title">Cárdigans niña</div>
+    <div class="cat-sub">Tejido suave, diseños importados · Talla 7 años</div>
+  </div>
+
+  <div class="grid3">
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 140/ositos y fresas de dibujos animados.png" alt="Cárdigan Ositos y Fresas Animados"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Ositos y Fresas Animados</div>
+        <div class="pmeta3">Ositos y fresas estilo dibujo animado en tejido suave y colorido. Adorable y expresivo, perfecto para las niñas más soñadoras.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 6–7 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 150/cárdigan punto estampado de fresas.jpg" alt="Cárdigan Punto Fresas"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Punto Estampado de Fresas</div>
+        <div class="pmeta3">Tejido de punto con fresas estampadas en repetición armoniosa. Ligero, fresco y muy femenino, ideal para el entretiempo.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 7 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard3">
+      <div class="photo3"><img src="img/talla 150/cárdigan punto estampado de fresas con cuello.jpeg" alt="Cárdigan Fresas con Cuello"></div>
+      <div class="info3">
+        <div class="pname3">Cárdigan Fresas con Cuello</div>
+        <div class="pmeta3">Cárdigan de fresas con acabado de cuello decorativo especial. Elegante y detallado, una pieza que destaca entre todas las demás.</div>
+        <div class="prow3">
+          <span class="ptalla3">Talla 7 años</span>
+          <span><span class="pprice-from3">Desde </span><span class="pprice3">S/ 45</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pagefoot">Marie Kids · Ropa importada <span class="num">08</span></div>
+</div>
+
+<!-- ============ PÁGINA FINAL ============ -->
+<div class="page closing">
+  <h2>Comprar es fácil</h2>
+  <div class="lede">Elige tus prendas favoritas y nosotros nos encargamos del resto. Envíos a todo el Perú, rápidos, seguros y confiables.</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="stitle">Elige</div>
+      <div class="sdesc">tus prendas favoritas de este catálogo</div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="stitle">Contáctanos</div>
+      <div class="sdesc">por WhatsApp y realiza tu pedido</div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="stitle">Recibe</div>
+      <div class="sdesc">tu compra en la puerta de tu casa</div>
+    </div>
+  </div>
+
+  <div class="contact-box">
+    <div class="contact-col">
+      <h4>WhatsApp</h4>
+      <p>930 419 029</p>
+    </div>
+    <div class="contact-col">
+      <h4>Facebook</h4>
+      <p>facebook.com/MarieKids.peru</p>
+    </div>
+    <div class="contact-col">
+      <h4>Instagram</h4>
+      <p>@mariekids.oficial</p>
+    </div>
+    <div class="contact-col">
+      <h4>TikTok</h4>
+      <p>@mariekids.oficial</p>
+    </div>
+  </div>
+
+  <div class="note-box">Este catálogo se irá actualizando con más colecciones (vestidos, casacas, conjuntos y más) a medida que se agreguen nuevas fotos y precios.</div>
+
+  <div class="pagefoot" style="width:100%">Marie Kids · Vistiendo su infancia con estilo y amor <span class="num">09</span></div>
+</div>
+
+</div><!-- /book-container -->
+
+</body>
+</html>

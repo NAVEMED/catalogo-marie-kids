@@ -1,0 +1,120 @@
+@page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; color: #4A3F4E; }
+
+  :root {
+    --cream: #FDF1ED;
+    --pink: #FD7E9B;
+    --pink-soft: #FFE3EA;
+    --yellow: #FDC451;
+    --yellow-soft: #FFF2D6;
+    --teal: #5FC2B0;
+    --teal-soft: #DFF3EF;
+    --purple: #B895CF;
+    --purple-dark: #714C95;
+    --purple-soft: #EFE5F6;
+    --coral: #FF978B;
+    --ink: #4A3F4E;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: var(--cream);
+    overflow: hidden;
+    page-break-after: always;
+    zoom: 1.3026;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .pagefoot {
+    position: absolute;
+    bottom: 10mm;
+    left: 16mm;
+    right: 16mm;
+    font-size: 8.5px;
+    letter-spacing: 0.06em;
+    color: #B79CC2;
+    text-transform: uppercase;
+    border-top: 0.6px solid #F0D9E2;
+    padding-top: 3mm;
+  }
+  .pagefoot .num { float: right; }
+
+  /* ---------- COVER ---------- */
+  .cover-band { position:absolute; top:0; left:0; right:0; height:7mm; background: linear-gradient(90deg, var(--pink), var(--purple), var(--teal), var(--yellow)); }
+  .deco { position: absolute; }
+  .logo-wrap { position: absolute; top: 26mm; left: 0; right: 0; text-align: center; }
+  .logo-wrap img { width: 145mm; }
+  .cover-tagline { position: absolute; top: 105mm; left: 0; right: 0; text-align: center; font-size: 14px; color: var(--purple-dark); font-weight: 500; }
+  .cover-pill { position: absolute; top: 119mm; left: 0; right: 0; text-align: center; }
+  .cover-pill span { background: var(--pink); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; padding: 3mm 9mm; border-radius: 20px; }
+
+  .cover-photos { position: absolute; top: 136mm; left: 16mm; right: 16mm; height: 122mm; }
+  .cover-photos .grid4 { display: block; height: 100%; }
+  .cover-photos .grid4:after { content:""; display:block; clear:both; }
+  .cover-thumb { float:left; width: 23.5%; height: 100%; margin-right: 2%; border-radius: 8px; overflow: hidden; background:#fff; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(180,140,160,0.25); }
+  .cover-thumb:last-child { margin-right: 0; }
+  .cover-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  .cover-contact { position: absolute; bottom: 14mm; left: 16mm; right: 16mm; text-align: center; font-size: 10.5px; color: var(--purple-dark); font-weight: 600; }
+  .cover-contact .sep { color: var(--pink); margin: 0 2mm; }
+
+  /* ---------- CATEGORY HEADER ---------- */
+  .cat-header { height: 40mm; position: relative; padding: 13mm 16mm 0 16mm; background: var(--pink-soft); }
+  .cat-eyebrow { font-size: 11px; letter-spacing: 0.18em; font-weight: 700; text-transform: uppercase; color: var(--pink); }
+  .cat-title { font-size: 34px; font-weight: 700; margin-top: 2mm; color: var(--purple-dark); }
+  .cat-sub { font-size: 11.5px; margin-top: 2.5mm; color: #8A7690; }
+  .cat-code { position:absolute; top: 13mm; right:16mm; background:#fff; border:1px solid var(--pink); color: var(--pink); font-size:10px; font-weight:700; padding:2mm 5mm; border-radius:14px; }
+
+  .grid { padding: 8mm 16mm 0 16mm; }
+  .grid:after { content: ""; display: block; clear: both; }
+  .pcard {
+    float: left; width: 47%; margin: 0 0 6mm 0;
+    background: #fff; border: 0.7px solid #F3DCE3; border-radius: 8px;
+    overflow: hidden;
+  }
+  .pcard:nth-child(odd) { margin-right: 6%; }
+  .pcard .photo { width: 100%; height: 62mm; overflow: hidden; background: var(--cream); }
+  .pcard .photo img { width: 100%; height: 100%; object-fit: cover; display:block; }
+  .pcard .info { padding: 5mm 6mm 6mm 6mm; }
+  .pcard .pname { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .pcard .pmeta { font-size: 9.5px; color: #9A8AA0; margin-top: 1.5mm; }
+  .pcard .prow { display:flex; justify-content: space-between; align-items: baseline; margin-top: 4mm; }
+  .pcard .ptalla { font-size: 9.5px; color: #8A7690; }
+  .pcard .pprice-from { font-size: 8.5px; color: #B79CC2; }
+  .pcard .pprice { font-size: 18px; font-weight: 700; color: var(--pink); }
+
+  /* ---------- CLOSING ---------- */
+  .closing { padding: 16mm; }
+  .closing h2 { font-size: 25px; color: var(--purple-dark); font-weight: 700; }
+  .closing .lede { font-size: 11px; color: #8A7690; margin-top: 3mm; max-width: 150mm; line-height: 1.6; }
+
+  .steps { margin-top: 10mm; display: flex; }
+  .step { width: 31%; margin-right: 3.5%; text-align: center; }
+  .step:last-child { margin-right: 0; }
+  .step .num { width: 11mm; height: 11mm; line-height: 11mm; border-radius: 50%; background: var(--pink); color: #fff; font-weight: 700; font-size: 12px; margin: 0 auto 3mm auto; }
+  .step .stitle { font-size: 12px; font-weight: 700; color: var(--purple-dark); }
+  .step .sdesc { font-size: 9.5px; color: #8A7690; margin-top: 1.5mm; }
+
+  .contact-box { margin-top: 12mm; background: var(--purple-soft); border-radius: 10px; padding: 8mm; display:flex; flex-wrap: wrap; }
+  .contact-col { width: 48%; margin-bottom: 5mm; }
+  .contact-col h4 { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: 1.5mm; }
+  .contact-col p { font-size: 12px; color: var(--purple-dark); font-weight: 600; }
+
+  .note-box { margin-top: 10mm; border: 1.4px dashed var(--pink); border-radius: 8px; padding: 5mm 6mm; font-size: 10px; color: #8A7690; line-height: 1.6; }
+
+  /* ---------- 3-COLUMN COMPACT GRID ---------- */
+  .grid3 { padding: 7mm 16mm 0 16mm; }
+  .grid3:after { content:""; display:block; clear:both; }
+  .pcard3 { float:left; width: 31.3%; margin: 0 3% 5mm 0; background:#fff; border:0.7px solid #F3DCE3; border-radius:7px; overflow:hidden; }
+  .pcard3:nth-child(3n) { margin-right: 0; }
+  .pcard3 .photo3 { width:100%; height:46mm; overflow:hidden; background:var(--cream); }
+  .pcard3 .photo3 img { width:100%; height:100%; object-fit:cover; display:block; }
+  .pcard3 .info3 { padding: 3.5mm 4mm 4.5mm 4mm; }
+  .pcard3 .pname3 { font-size: 10.5px; font-weight:700; color:var(--ink); line-height:1.25; min-height: 8mm; }
+  .pcard3 .prow3 { display:flex; justify-content:space-between; align-items:baseline; margin-top: 3mm; }
+  .pcard3 .ptalla3 { font-size: 8px; color:#9A8AA0; }
+  .pcard3 .pprice3 { font-size: 13px; font-weight:700; color:var(--pink); }
+  .pcard3 .pprice-from3 { font-size: 7px; color:#B79CC2; }
