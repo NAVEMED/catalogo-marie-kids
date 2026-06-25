@@ -460,8 +460,8 @@ body {
 .pcard3 .photo3 {
   overflow: hidden;
   background: var(--warm);
-  flex-shrink: 0;
-  height: 240px;
+  flex: 1;
+  min-height: 0;
   width: 100%;
 }
 .pcard3 .photo3 img {
@@ -472,11 +472,12 @@ body {
   display: block;
 }
 .pcard3 .info3 {
-  padding: 7px 9px 8px;
+  padding: 5px 9px 6px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  flex: 1;
+  gap: 2px;
+  flex-shrink: 0;
+  flex-grow: 0;
   overflow: hidden;
 }
 .pcard3 .pname3 {
@@ -485,6 +486,11 @@ body {
   font-weight: 700;
   color: var(--ink);
   line-height: 1.25;
+  /* AGREGAR ESTAS 3 LÍNEAS: */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .pcard3 .pmeta3 {
   font-size: 9px;
@@ -499,7 +505,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
+  margin-top: 4px;
   padding-top: 4px;
   flex-wrap: wrap;
   gap: 2px;
@@ -602,6 +608,211 @@ body {
   text-transform: uppercase;
 }
 
+/* ===================================================
+   DENIM CATALOG — layout premium estilo internacional
+   ===================================================
+   Uso: añadir clase "denim-page" a las páginas de jeans
+   y reemplazar grid3/pcard3 por grid-denim/card-denim
+   dentro de esas páginas.
+   =================================================== */
+
+/* --- Cabecera denim con acento azul índigo --- */
+.denim-page .cat-header {
+  background: linear-gradient(135deg, #0f2e4a 0%, #1a4a72 100%);
+  border-bottom: 3px solid #4a9edd;
+}
+.denim-page .cat-header::before {
+  background: linear-gradient(180deg, #4a9edd 0%, #c8e6ff 100%);
+}
+.denim-page .cat-code   { color: #a8d4f5; }
+.denim-page .cat-eyebrow { color: #7bbfe8; }
+.denim-page .cat-title  { color: #ffffff; }
+.denim-page .cat-sub    { color: #8fc8ed; }
+
+/* --- Grid denim: 2 columnas → imágenes grandes y bien centradas --- */
+.grid-denim {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  flex: 1;
+  overflow: hidden;
+  align-content: stretch;
+}
+
+/* Cuando hay 3 productos en página: 3 columnas --- */
+.grid-denim.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+/* --- Tarjeta denim --- */
+.card-denim {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dde8f2;
+  box-shadow: 0 2px 10px rgba(15,46,74,0.10);
+  height: 100%;
+  position: relative;
+}
+
+/* Foto: crece para llenar espacio disponible, cover sin espacios blancos */
+.card-denim .photo-denim {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #eef3f8;
+  position: relative;
+}
+
+.card-denim .photo-denim img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Badge de código en esquina superior */
+.card-denim .badge-cod {
+  position: absolute;
+  top: 7px; left: 7px;
+  background: rgba(15,46,74,0.82);
+  color: #a8d4f5;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+/* Franja azul índigo debajo de la foto */
+.card-denim .photo-denim::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1a4a72 0%, #4a9edd 50%, #1a4a72 100%);
+}
+
+/* Info inferior */
+.card-denim .info-denim {
+  padding: 7px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.card-denim .pname-d {
+  font-family: 'Playfair Display', serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0f2e4a;
+  line-height: 1.25;
+}
+
+.card-denim .pmeta-d {
+  font-size: 8.5px;
+  color: #4a6a85;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-denim .prow-d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 5px;
+  border-top: 1px solid #dde8f2;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.card-denim .ptalla-d {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #1a4a72;
+  background: #dde8f2;
+  padding: 3px 9px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.card-denim .pprice-from-d { font-size: 9px; color: #7a9bb5; font-weight: 500; }
+.card-denim .pprice-d {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a4a72;
+}
+
+/* Footer de página denim con tono oscuro */
+.denim-page .pagefoot {
+  background: #0f2e4a;
+  color: #7bbfe8;
+  border-top: none;
+}
+.denim-page .pagefoot .num {
+  color: #4a9edd;
+}
+
+/* ===== PRINT: denim cards también usan contain ===== */
+@media print {
+  .grid-denim {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    align-content: stretch !important;
+  }
+  .grid-denim.cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+  }
+  .card-denim { height: 100% !important; display: flex !important; flex-direction: column !important; }
+  .card-denim .photo-denim {
+    flex: 1 !important;
+    min-height: 0 !important;
+    aspect-ratio: unset !important;
+    height: auto !important;
+  }
+  .card-denim .photo-denim img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+}
+
+/* ===== RESPONSIVE MÓVIL: denim ===== */
+@media (max-width: 768px) {
+  .grid-denim,
+  .grid-denim.cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+  .card-denim { height: auto !important; }
+  .card-denim .photo-denim { flex: 1 !important; min-height: 120px !important; }
+  .card-denim .pname-d  { font-size: 10px !important; }
+  .card-denim .pmeta-d  { font-size: 8px !important; }
+  .card-denim .pprice-d { font-size: 13px !important; }
+}
+
 /* ===== PRINT — fuerza A4 exacto, cancela responsive ===== */
 @media print {
   body { background: white; }
@@ -654,7 +865,8 @@ body {
   .pcard .pname { font-size: 13px !important; }
   .pcard .pprice { font-size: 17px !important; }
   .pcard3 { height: 100% !important; }
-  .pcard3 .photo3 { height: 240px !important; aspect-ratio: unset !important; }
+  .pcard3 .photo3 { flex: 1 !important; min-height: 0 !important; aspect-ratio: unset !important; }
+  .grid3-p10 .pcard3 .photo3, .grid3-p11 .pcard3 .photo3 { flex: unset !important; height: 350px !important; }
   .pcard3 .photo3 img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
   .pcard3 .pname3 { font-size: 11.5px !important; }
   .pcard3 .pprice3 { font-size: 15px !important; }
@@ -763,4 +975,540 @@ body {
   .contact-col { min-width: 80px !important; padding: 8px 12px !important; }
   .social-stickers { gap: 10px !important; }
   .sticker svg { width: 40px !important; height: 40px !important; }
+}
+
+/* ===================================================
+   PÁGINA 8 — 3 cards que llenan toda la hoja
+   =================================================== */
+.page-full3 {
+  display: flex;
+  flex-direction: column;
+}
+.page-full3 .grid3 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  align-content: stretch;
+}
+.page-full3 .pcard3 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.page-full3 .photo3 {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.page-full3 .photo3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.page-full3 .info3 {
+  flex-shrink: 0;
+}
+
+/* ===================================================
+   PALETA DOBLE POR TALLA (páginas 9+10 fusionadas)
+   =================================================== */
+.talla-colors-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 4px 0 3px;
+}
+.tc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tc-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 0.04em;
+  min-width: 26px;
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   CARDS DENIM MÁS COMPACTAS — texto menor, menos padding
+   =================================================== */
+.card-denim .info-denim {
+  padding: 5px 8px 6px;
+  gap: 2px;
+}
+.card-denim .pname-d {
+  font-size: 10px;
+  line-height: 1.2;
+}
+.card-denim .pmeta-d {
+  font-size: 7.5px;
+  -webkit-line-clamp: 2;
+  line-height: 1.35;
+}
+.card-denim .prow-d {
+  padding-top: 4px;
+  margin-top: 3px;
+}
+.card-denim .ptalla-d {
+  font-size: 7px;
+  padding: 2px 7px;
+}
+.card-denim .pprice-from-d { font-size: 8px; }
+.card-denim .pprice-d { font-size: 13px; }
+
+/* Grid 2 cols denim: fotos más grandes */
+.grid-denim {
+  gap: 8px;
+  padding: 8px 12px;
+}
+.grid-denim.cols-3 {
+  gap: 7px;
+  padding: 7px 11px;
+}
+
+/* Cabecera denim más compacta */
+.denim-page .cat-header {
+  padding: 8px 16px 7px;
+}
+.denim-page .cat-title { font-size: 18px; }
+.denim-page .cat-sub   { font-size: 9px; margin-top: 2px; }
+
+
+/* ===================================================
+   PÁGINA NIÑO — layout foto + tabla de tallas/colores
+   =================================================== */
+.page-nino {
+  display: flex;
+  flex-direction: column;
+}
+
+.nino-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  min-height: 0;
+}
+
+.nino-card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dde8f2;
+  box-shadow: 0 2px 8px rgba(26,46,74,0.10);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.nino-foto {
+  width: 42%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  background: #eef3f8;
+}
+.nino-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.nino-badge {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(26,46,74,0.80);
+  color: #a8c8f0;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+
+.nino-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 10px 0;
+  gap: 4px;
+  min-width: 0;
+}
+.nino-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a2e4a;
+  line-height: 1.2;
+}
+.nino-desc {
+  font-size: 8.5px;
+  color: #4a6a8a;
+  line-height: 1.4;
+}
+.nino-precio {
+  font-size: 9px;
+  color: #1a2e4a;
+}
+.nino-precio .pprice3 {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Tabla de tallas y colores */
+.talla-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: auto;
+  font-size: 8px;
+}
+.talla-table th,
+.talla-table td {
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid #dde8f2;
+  vertical-align: middle;
+}
+.talla-table th {
+  background: #1a2e4a;
+  color: #a8c8f0;
+  font-weight: 700;
+  font-size: 7.5px;
+  letter-spacing: 0.04em;
+}
+.talla-table td:first-child {
+  font-weight: 700;
+  color: #1a2e4a;
+  background: #eef3f8;
+  text-align: left;
+  white-space: nowrap;
+}
+.talla-table tbody tr:nth-child(even) td {
+  background: #f8fbff;
+}
+.talla-table tbody tr:nth-child(even) td:first-child {
+  background: #e4ecf5;
+}
+.talla-table td { color: #1a2e4a; font-weight: 600; }
+
+/* Mini punto de color en encabezado de tabla */
+.cdot-th {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 2px;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+@media print {
+  .nino-layout {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    flex: 1 !important;
+  }
+  .nino-card { height: 100% !important; }
+  .nino-foto { height: 100% !important; }
+}
+
+/* ===================================================
+   PÁGINA CASACAS ÚNICA (niña + niño, tallas 2-3-4)
+   =================================================== */
+.page-casacas-all {
+  display: flex;
+  flex-direction: column;
+}
+.casacas-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px 4px;
+  gap: 4px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Títulos de sección niña / niño */
+.casacas-seccion-titulo {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  border-bottom: 1.5px solid #e0e0e0;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+
+/* Grid niña: 5 columnas */
+.casacas-grid-nina {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  flex: 1.6;
+  min-height: 0;
+}
+
+/* Grid niño: HONG + GOPENNIG (2 columnas, GOPENNIG más ancha) */
+.casacas-grid-nino {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Tarjeta base */
+.ccard {
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+.ccard-foto {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.ccard-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.ccard-info {
+  padding: 4px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.ccard-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
+}
+.ccard-desc {
+  font-size: 7px;
+  color: #666;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ccard-precio {
+  font-size: 8px;
+  color: #222;
+  margin-top: 1px;
+}
+.ccard-precio .pprice3 {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Filas de tallas con colores */
+.ccard-tallas {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+.ct-fila {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.ct-tag {
+  font-size: 7px;
+  font-weight: 800;
+  color: #fff;
+  background: #444;
+  border-radius: 3px;
+  padding: 1px 4px;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+/* puntos más pequeños dentro de estas cards */
+.ccard-tallas .cdot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+/* Tarjeta niño: orientación horizontal */
+.ccard-nino {
+  flex-direction: row !important;
+}
+.ccard-nino .ccard-foto {
+  width: 38%;
+  flex-shrink: 0;
+  flex: none;
+}
+.ccard-nino .ccard-info {
+  flex: 1;
+  padding: 8px 10px;
+}
+
+/* GOPENNIG: 3 minifotografías en fila */
+.ccard-gopennig {
+  flex-direction: column !important;
+}
+.gopennig-fotos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  height: 52%;
+  flex-shrink: 0;
+}
+.gfoto-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.gfoto-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.gfoto-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 6.5px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 0;
+}
+.ccard-gopennig .ccard-info {
+  flex: 1;
+  padding: 6px 10px 8px;
+}
+
+/* Pares de colores GOPENNIG */
+.cdot-par {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-right: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px 3px;
+}
+
+@media print {
+  .casacas-grid-nina { display: grid !important; grid-template-columns: repeat(5,1fr) !important; }
+  .casacas-grid-nino { display: grid !important; grid-template-columns: 1fr 2fr !important; }
+  .ccard { height: 100% !important; }
+}
+
+/* ===================================================
+   OVERLAY PALETA DE COLORES POR TALLA — sobre la foto
+   =================================================== */
+.photo3 {
+  position: relative;
+}
+.color-tallas-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.0) 100%);
+  padding: 14px 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cto-fila {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.cto-tag {
+  font-size: 6.5px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255,255,255,0.22);
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 3px;
+  padding: 1px 4px;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+.color-tallas-overlay .cdot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  flex-shrink: 0;
+}
+/* Páginas con pocas cards — no estirar hasta el fondo */
+.grid3-compact {
+  align-content: start;
+  flex: unset;
+  height: auto;
+}
+
+.grid3-compact .pcard3 {
+  height: auto;
+}
+
+.grid3-compact .photo3 {
+  flex: unset;
+  aspect-ratio: 3/4;
+}
+
+/* === PÁGINAS CON POCAS CARDS (p10, p11, p12): foto altura fija para llenar hoja === */
+.grid3-p10 .pcard3 .photo3,
+.grid3-p11 .pcard3 .photo3,
+.grid3-p12 .pcard3 .photo3 {
+  flex: unset !important;
+  height: 350px !important;
+  overflow: hidden !important;
+}
+
+.grid3-p10 .pcard3 .photo3 img,
+.grid3-p11 .pcard3 .photo3 img,
+.grid3-p12 .pcard3 .photo3 img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
 }
