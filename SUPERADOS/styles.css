@@ -1731,3 +1731,24 @@ body {
   object-position: center top !important;
   display: block !important;
 }
+
+
+/* ===== CAT-HEADER BOUTIQUE UNIFICADO - FIX FINAL 2026 ===== */
+.cat-header {
+  background: #f9f5f0 !important;
+  border: 1px solid #efe5d8 !important;
+  border-left: 4px solid #C97B84 !important;
+  border-bottom: 1px solid #efe5d8 !important;
+  padding: 14px 18px 10px !important;
+  text-align: left !important;
+  color: #2C2018 !important;
+}
+.cat-header::before { display: none !important; }
+.cat-header .cat-code { color: #C97B84 !important; font-size: 9px !important; letter-spacing: 2.5px !important; font-weight: 700 !important; }
+.cat-header .cat-title { color: #2C2018 !important; font-family: 'Playfair Display', serif !important; font-size: 22px !important; }
+.cat-header .cat-eyebrow, .cat-header .cat-sub { color: #7A6658 !important; }
+/* Mantener denim solo si realmente es pagina denim, pero en beige tambien para consistencia */
+.denim-page .cat-header { background: #f0ece6 !important; border-left-color: #5a7a9a !important; }
+.denim-page .cat-code { color: #5a7a9a !important; }
+.denim-page .cat-title { color: #2C2018 !important; }
+.denim-page .cat-eyebrow, .denim-page .cat-sub { color: #7A6658 !important; }

@@ -653,13 +653,6 @@ body {
    =================================================== */
 
 /* --- Cabecera denim con acento azul índigo --- */
-.denim-page .cat-header {
-  background: linear-gradient(135deg, #0f2e4a 0%, #1a4a72 100%);
-  border-bottom: 3px solid #4a9edd;
-}
-.denim-page .cat-header::before {
-  background: linear-gradient(180deg, #4a9edd 0%, #c8e6ff 100%);
-}
 .denim-page .cat-code {
   color: #a8d4f5;
 }
