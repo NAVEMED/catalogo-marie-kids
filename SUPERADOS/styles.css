@@ -355,6 +355,191 @@ body {
   background: transparent;
 }
 
+
+/* ===== PORTADA MARIE KIDS - CORREGIDA MARGENES Y SUBIR LOGO ===== */
+#portada-marie-kids.page.cover {
+  --beige: #f9f5f0;
+  --pink: #c97b84;
+  --dark: #2c2018;
+  --gold: #c9a86a;
+  --gold-soft: rgba(201, 168, 106, 0.25);
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fffdfa;
+  position: relative;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: var(--dark);
+  box-shadow: 0 25px 80px rgba(44, 32, 24, 0.12);
+  overflow: hidden;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* >>> MARGEN SEGURO PARA QUE NO SE PEGUE AL BORDE ROJO <<< */
+  padding: 6mm 10mm 8mm 10mm;
+}
+#portada-marie-kids * { box-sizing: border-box; }
+#portada-marie-kids .cover-top-band {
+  height: 10px;
+  background: var(--beige);
+  position: relative;
+  flex-shrink: 0;
+  margin: -6mm -10mm 0 -10mm;
+  width: calc(100% + 20mm);
+}
+#portada-marie-kids .cover-top-band:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 100%;
+  background: var(--pink);
+}
+#portada-marie-kids .cover-top-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent 70%);
+  opacity: 0.5;
+  margin: 0 -10mm;
+  width: calc(100% + 20mm);
+}
+#portada-marie-kids .cover-inner {
+  /* >>> REDUCIDO ARRIBA PARA SUBIR LOGO <<< */
+  padding: 4px 12px 0 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+#portada-marie-kids .logo-wrap {
+  text-align: center;
+  /* >>> SUBIR: margen top 0 en vez de 12px <<< */
+  margin: 0 auto 4px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#portada-marie-kids .logo-wrap img {
+  width: 260px !important;
+  max-width: 68% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+}
+#portada-marie-kids .logo-rainbow { font-family: "Sniglet", cursive; font-size: 62px; line-height: 1; letter-spacing: -0.02em; display: inline-flex; align-items: baseline; font-weight: 400; position: relative; }
+#portada-marie-kids .logo-rainbow span { display: inline-block; }
+#portada-marie-kids .logo-rainbow .m { color: #e85d75; }
+#portada-marie-kids .logo-rainbow .a1 { color: #ff8e53; }
+#portada-marie-kids .logo-rainbow .r { color: #ffc857; }
+#portada-marie-kids .logo-rainbow .i { color: #7ac74f; position: relative; }
+#portada-marie-kids .logo-rainbow .e { color: #4ecdc4; }
+#portada-marie-kids .logo-rainbow .k { color: #e85d75; margin-left: 14px; }
+#portada-marie-kids .logo-rainbow .i2 { color: #9b7ede; position: relative; }
+#portada-marie-kids .logo-rainbow .d { color: #4ecdc4; }
+#portada-marie-kids .logo-rainbow .s { color: #ff8e53; }
+#portada-marie-kids .crown { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 18px; }
+#portada-marie-kids .logo-kids-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  font-weight: 600;
+}
+#portada-marie-kids .cover-tagline {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #6b5a4e;
+  margin: 2px auto 10px;
+  letter-spacing: 0.02em;
+  max-width: 90%;
+  width: 100%;
+}
+#portada-marie-kids .cover-pill {
+  text-align: center;
+  margin: 6px auto 14px;
+  width: 100%;
+  max-width: 100%;
+}
+#portada-marie-kids .cover-pill span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 22px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: white;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--dark);
+  box-shadow: 0 4px 18px rgba(201, 168, 106, 0.15);
+}
+#portada-marie-kids .cover-pill span:before,
+#portada-marie-kids .cover-pill span:after { content: "✦"; color: var(--gold); font-size: 9px; }
+#portada-marie-kids .indice-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 12px;
+  width: 100%;
+  padding: 0 4px;
+}
+#portada-marie-kids .indice-head h2 { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 700; margin: 0; color: var(--dark); }
+#portada-marie-kids .indice-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-soft), transparent); }
+#portada-marie-kids .indice-head .count { font-size: 9px; letter-spacing: 0.2em; color: var(--gold); border: 1px solid var(--gold-soft); padding: 3px 8px; border-radius: 99px; background: var(--beige); }
+#portada-marie-kids .grid-indice { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .cat-card { position: relative; background: white; border: 1px solid rgba(201, 168, 106, 0.28); border-radius: 14px; padding: 12px 12px 11px 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 10px rgba(44, 32, 24, 0.04); transition: all 0.22s ease; text-decoration: none; color: inherit; }
+#portada-marie-kids .cat-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(44, 32, 24, 0.1); border-color: var(--pink); }
+#portada-marie-kids .cat-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--beige); display: grid; place-items: center; font-size: 17px; flex-shrink: 0; border: 1px solid rgba(201, 168, 106, 0.18); }
+#portada-marie-kids .cat-text { flex: 1; min-width: 0; }
+#portada-marie-kids .cat-title { font-size: 12.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#portada-marie-kids .cat-sub { font-size: 10px; color: #8c7a6e; font-weight: 500; margin-top: 1px; }
+#portada-marie-kids .cat-pages { font-size: 9px; letter-spacing: 0.12em; color: var(--gold); font-weight: 700; margin-top: 3px; }
+#portada-marie-kids .cat-num { position: absolute; top: 8px; right: 10px; font-size: 8px; letter-spacing: 0.1em; color: #b9a99a; font-weight: 700; }
+#portada-marie-kids .cat-bow { position: absolute; bottom: 6px; right: 8px; font-size: 10px; opacity: 0.45; }
+#portada-marie-kids .cat-card:hover .cat-bow { opacity: 1; }
+#portada-marie-kids .best-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 10px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .best-head h3 { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin: 0; }
+#portada-marie-kids .best-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-soft), transparent); }
+#portada-marie-kids .grid-best { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .best-thumb { aspect-ratio: 1; border-radius: 12px; position: relative; overflow: hidden; border: 1px solid rgba(201, 168, 106, 0.22); background: white; box-shadow: 0 2px 8px rgba(44, 32, 24, 0.05); }
+#portada-marie-kids .best-thumb .grad { position: absolute; inset: 0; opacity: 0.9; }
+#portada-marie-kids .best-thumb .emoji { position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08)); }
+#portada-marie-kids .best-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#portada-marie-kids .best-thumb .label { position: absolute; left: 5px; right: 5px; bottom: 5px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(6px); border-radius: 7px; font-size: 8.5px; font-weight: 700; text-align: center; padding: 4px 3px; line-height: 1.1; color: var(--dark); border: 1px solid rgba(255, 255, 255, 0.8); }
+#portada-marie-kids .pagefoot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 12px 36px; background: var(--dark); color: #ede3d8; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; width: calc(100% + 20mm); margin-left: -10mm; margin-right: -10mm; margin-bottom: -8mm; }
+#portada-marie-kids .pagefoot .contact { display: flex; gap: 14px; align-items: center; }
+#portada-marie-kids .pagefoot .sep { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; display: inline-block; }
+#portada-marie-kids .pagefoot .num { background: var(--gold); color: var(--dark); padding: 4px 10px; border-radius: 99px; font-weight: 800; letter-spacing: 0.1em; }
+@media print {
+  #portada-marie-kids.page.cover { box-shadow: none; border-radius: 0; width: 210mm; min-height: 297mm; }
+  #portada-marie-kids .cat-card:hover { transform: none; }
+}
+@media (max-width: 700px) {
+  #portada-marie-kids.page.cover { width: 100%; min-height: auto; padding: 4mm 4mm; }
+  #portada-marie-kids .cover-inner { padding: 10px 8px 0 8px; }
+  #portada-marie-kids .logo-rainbow { font-size: 44px; }
+  #portada-marie-kids .grid-indice { grid-template-columns: 1fr; }
+  #portada-marie-kids .grid-best { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  #portada-marie-kids .pagefoot { padding: 10px 14px; flex-wrap: wrap; gap: 6px; }
+  #portada-marie-kids .pagefoot .contact { flex-wrap: wrap; }
+}
+
+
 /* ===== CAT-HEADER BOUTIQUE UNIFICADO ===== */
 .cat-header {
   background: #f9f5f0 !important;
@@ -653,13 +838,6 @@ body {
    =================================================== */
 
 /* --- Cabecera denim con acento azul índigo --- */
-.denim-page .cat-header {
-  background: linear-gradient(135deg, #0f2e4a 0%, #1a4a72 100%);
-  border-bottom: 3px solid #4a9edd;
-}
-.denim-page .cat-header::before {
-  background: linear-gradient(180deg, #4a9edd 0%, #c8e6ff 100%);
-}
 .denim-page .cat-code {
   color: #a8d4f5;
 }
@@ -1752,3 +1930,5 @@ body {
 .denim-page .cat-code { color: #5a7a9a !important; }
 .denim-page .cat-title { color: #2C2018 !important; }
 .denim-page .cat-eyebrow, .denim-page .cat-sub { color: #7A6658 !important; }
+
+
