@@ -1,0 +1,1934 @@
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blush: #f2d9d9;
+  --rose: #c97b84;
+  --rose-dark: #a5545e;
+  --cream: #fdf8f4;
+  --warm: #ede3d8;
+  --ink: #2c2018;
+  --muted: #7a6658;
+  --white: #ffffff;
+  --sold: #d64040;
+  /* A4 at 96dpi: 794px × 1123px */
+  --page-w: 794px;
+  --page-h: 1123px;
+}
+
+body {
+  background: #c8b8b0;
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+.toolbar-brand {
+  font-family: "Playfair Display", serif;
+  color: var(--blush);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.btn-pdf {
+  background: var(--rose);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background 0.2s;
+}
+.btn-pdf:hover {
+  background: var(--rose-dark);
+}
+.btn-pdf svg {
+  width: 14px;
+  height: 14px;
+}
+.toolbar-hint {
+  font-size: 11px;
+  color: #9e8f88;
+}
+
+/* ===== BOOK WRAPPER ===== */
+.book-container {
+  margin-top: 48px;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ===== PAGE ===== */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--cream);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  page-break-after: always;
+  break-after: page;
+}
+.page + .page {
+  margin-top: 5px;
+  border-top: 2px solid #b8a89a;
+}
+
+/* ===== PAGE FOOTER ===== */
+.pagefoot {
+  margin-top: auto;
+  padding: 6px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 7px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--warm);
+  flex-shrink: 0;
+}
+.pagefoot .num {
+  font-family: "Playfair Display", serif;
+  font-size: 12px;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* ===== COVER (PORTADA FRONTAL) ===== */
+.cover {
+  background: linear-gradient(160deg, #f9f0ea 0%, #f0ddd6 40%, #e8cdc4 100%);
+  color: var(--ink);
+  height: var(--page-h);
+}
+.cover-band {
+  height: 5px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--rose) 0%,
+    var(--blush) 60%,
+    var(--rose-dark) 100%
+  );
+}
+.cover-inner {
+  padding: 22px 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+.logo-wrap img {
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.cover-tagline {
+  font-family: "Playfair Display", serif;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+.cover-pill {
+  display: inline-block;
+  background: var(--rose);
+  color: white;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+.cover-photos {
+  margin-top: 16px;
+  width: 100%;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+.cover-thumb {
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  border: 2px solid rgba(201, 123, 132, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.cover-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cover-contact {
+  text-align: center;
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 14px;
+  letter-spacing: 0.1em;
+  padding: 0 10px;
+}
+.cover-contact .sep {
+  margin: 0 5px;
+  color: var(--rose);
+}
+.cover .pagefoot {
+  color: var(--muted);
+  border-top-color: rgba(201, 123, 132, 0.2);
+  background: transparent;
+}
+.cover .pagefoot .num {
+  color: var(--rose);
+}
+
+/* ===== CLOSING PAGE (igual estilo que portada frontal) ===== */
+.closing {
+  background: linear-gradient(160deg, #f9f0ea 0%, #f0ddd6 40%, #e8cdc4 100%);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  height: var(--page-h);
+  overflow: hidden;
+}
+.closing-band {
+  height: 5px;
+  width: 100%;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--rose) 0%,
+    var(--blush) 60%,
+    var(--rose-dark) 100%
+  );
+}
+.closing-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 40px 0;
+  text-align: center;
+  overflow: hidden;
+}
+.closing h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--rose-dark);
+  margin-bottom: 8px;
+}
+.closing .lede {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 340px;
+  margin: 0 auto 22px;
+}
+.steps {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.step .num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+.step .stitle {
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--rose-dark);
+}
+.step .sdesc {
+  font-size: 9px;
+  color: var(--muted);
+  max-width: 85px;
+  text-align: center;
+  line-height: 1.4;
+}
+.contact-box {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.contact-col {
+  background: rgba(201, 123, 132, 0.1);
+  border: 1px solid rgba(201, 123, 132, 0.25);
+  border-radius: 10px;
+  padding: 12px 18px;
+  min-width: 100px;
+}
+.contact-col h4 {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: var(--rose);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.contact-col p {
+  font-size: 10px;
+  color: var(--ink);
+}
+.note-box {
+  background: rgba(201, 123, 132, 0.08);
+  border-left: 3px solid var(--rose);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.5;
+  text-align: left;
+  max-width: 420px;
+}
+.closing .pagefoot {
+  color: var(--muted);
+  border-top-color: rgba(201, 123, 132, 0.2);
+  width: 100%;
+  background: transparent;
+}
+
+
+/* ===== PORTADA MARIE KIDS - CORREGIDA MARGENES Y SUBIR LOGO ===== */
+#portada-marie-kids.page.cover {
+  --beige: #f9f5f0;
+  --pink: #c97b84;
+  --dark: #2c2018;
+  --gold: #c9a86a;
+  --gold-soft: rgba(201, 168, 106, 0.25);
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fffdfa;
+  position: relative;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: var(--dark);
+  box-shadow: 0 25px 80px rgba(44, 32, 24, 0.12);
+  overflow: hidden;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* >>> MARGEN SEGURO PARA QUE NO SE PEGUE AL BORDE ROJO <<< */
+  padding: 6mm 10mm 8mm 10mm;
+}
+#portada-marie-kids * { box-sizing: border-box; }
+#portada-marie-kids .cover-top-band {
+  height: 10px;
+  background: var(--beige);
+  position: relative;
+  flex-shrink: 0;
+  margin: -6mm -10mm 0 -10mm;
+  width: calc(100% + 20mm);
+}
+#portada-marie-kids .cover-top-band:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 100%;
+  background: var(--pink);
+}
+#portada-marie-kids .cover-top-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent 70%);
+  opacity: 0.5;
+  margin: 0 -10mm;
+  width: calc(100% + 20mm);
+}
+#portada-marie-kids .cover-inner {
+  /* >>> REDUCIDO ARRIBA PARA SUBIR LOGO <<< */
+  padding: 4px 12px 0 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+#portada-marie-kids .logo-wrap {
+  text-align: center;
+  /* >>> SUBIR: margen top 0 en vez de 12px <<< */
+  margin: 0 auto 4px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#portada-marie-kids .logo-wrap img {
+  width: 260px !important;
+  max-width: 68% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+}
+#portada-marie-kids .logo-rainbow { font-family: "Sniglet", cursive; font-size: 62px; line-height: 1; letter-spacing: -0.02em; display: inline-flex; align-items: baseline; font-weight: 400; position: relative; }
+#portada-marie-kids .logo-rainbow span { display: inline-block; }
+#portada-marie-kids .logo-rainbow .m { color: #e85d75; }
+#portada-marie-kids .logo-rainbow .a1 { color: #ff8e53; }
+#portada-marie-kids .logo-rainbow .r { color: #ffc857; }
+#portada-marie-kids .logo-rainbow .i { color: #7ac74f; position: relative; }
+#portada-marie-kids .logo-rainbow .e { color: #4ecdc4; }
+#portada-marie-kids .logo-rainbow .k { color: #e85d75; margin-left: 14px; }
+#portada-marie-kids .logo-rainbow .i2 { color: #9b7ede; position: relative; }
+#portada-marie-kids .logo-rainbow .d { color: #4ecdc4; }
+#portada-marie-kids .logo-rainbow .s { color: #ff8e53; }
+#portada-marie-kids .crown { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 18px; }
+#portada-marie-kids .logo-kids-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  font-weight: 600;
+}
+#portada-marie-kids .cover-tagline {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #6b5a4e;
+  margin: 2px auto 10px;
+  letter-spacing: 0.02em;
+  max-width: 90%;
+  width: 100%;
+}
+#portada-marie-kids .cover-pill {
+  text-align: center;
+  margin: 6px auto 14px;
+  width: 100%;
+  max-width: 100%;
+}
+#portada-marie-kids .cover-pill span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 22px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: white;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--dark);
+  box-shadow: 0 4px 18px rgba(201, 168, 106, 0.15);
+}
+#portada-marie-kids .cover-pill span:before,
+#portada-marie-kids .cover-pill span:after { content: "✦"; color: var(--gold); font-size: 9px; }
+#portada-marie-kids .indice-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 12px;
+  width: 100%;
+  padding: 0 4px;
+}
+#portada-marie-kids .indice-head h2 { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 700; margin: 0; color: var(--dark); }
+#portada-marie-kids .indice-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-soft), transparent); }
+#portada-marie-kids .indice-head .count { font-size: 9px; letter-spacing: 0.2em; color: var(--gold); border: 1px solid var(--gold-soft); padding: 3px 8px; border-radius: 99px; background: var(--beige); }
+#portada-marie-kids .grid-indice { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .cat-card { position: relative; background: white; border: 1px solid rgba(201, 168, 106, 0.28); border-radius: 14px; padding: 12px 12px 11px 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 10px rgba(44, 32, 24, 0.04); transition: all 0.22s ease; text-decoration: none; color: inherit; }
+#portada-marie-kids .cat-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(44, 32, 24, 0.1); border-color: var(--pink); }
+#portada-marie-kids .cat-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--beige); display: grid; place-items: center; font-size: 17px; flex-shrink: 0; border: 1px solid rgba(201, 168, 106, 0.18); }
+#portada-marie-kids .cat-text { flex: 1; min-width: 0; }
+#portada-marie-kids .cat-title { font-size: 12.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#portada-marie-kids .cat-sub { font-size: 10px; color: #8c7a6e; font-weight: 500; margin-top: 1px; }
+#portada-marie-kids .cat-pages { font-size: 9px; letter-spacing: 0.12em; color: var(--gold); font-weight: 700; margin-top: 3px; }
+#portada-marie-kids .cat-num { position: absolute; top: 8px; right: 10px; font-size: 8px; letter-spacing: 0.1em; color: #b9a99a; font-weight: 700; }
+#portada-marie-kids .cat-bow { position: absolute; bottom: 6px; right: 8px; font-size: 10px; opacity: 0.45; }
+#portada-marie-kids .cat-card:hover .cat-bow { opacity: 1; }
+#portada-marie-kids .best-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 10px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .best-head h3 { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin: 0; }
+#portada-marie-kids .best-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-soft), transparent); }
+#portada-marie-kids .grid-best { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; padding: 0 4px; }
+#portada-marie-kids .best-thumb { aspect-ratio: 1; border-radius: 12px; position: relative; overflow: hidden; border: 1px solid rgba(201, 168, 106, 0.22); background: white; box-shadow: 0 2px 8px rgba(44, 32, 24, 0.05); }
+#portada-marie-kids .best-thumb .grad { position: absolute; inset: 0; opacity: 0.9; }
+#portada-marie-kids .best-thumb .emoji { position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08)); }
+#portada-marie-kids .best-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#portada-marie-kids .best-thumb .label { position: absolute; left: 5px; right: 5px; bottom: 5px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(6px); border-radius: 7px; font-size: 8.5px; font-weight: 700; text-align: center; padding: 4px 3px; line-height: 1.1; color: var(--dark); border: 1px solid rgba(255, 255, 255, 0.8); }
+#portada-marie-kids .pagefoot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 12px 36px; background: var(--dark); color: #ede3d8; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; width: calc(100% + 20mm); margin-left: -10mm; margin-right: -10mm; margin-bottom: -8mm; }
+#portada-marie-kids .pagefoot .contact { display: flex; gap: 14px; align-items: center; }
+#portada-marie-kids .pagefoot .sep { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; display: inline-block; }
+#portada-marie-kids .pagefoot .num { background: var(--gold); color: var(--dark); padding: 4px 10px; border-radius: 99px; font-weight: 800; letter-spacing: 0.1em; }
+@media print {
+  #portada-marie-kids.page.cover { box-shadow: none; border-radius: 0; width: 210mm; min-height: 297mm; }
+  #portada-marie-kids .cat-card:hover { transform: none; }
+}
+@media (max-width: 700px) {
+  #portada-marie-kids.page.cover { width: 100%; min-height: auto; padding: 4mm 4mm; }
+  #portada-marie-kids .cover-inner { padding: 10px 8px 0 8px; }
+  #portada-marie-kids .logo-rainbow { font-size: 44px; }
+  #portada-marie-kids .grid-indice { grid-template-columns: 1fr; }
+  #portada-marie-kids .grid-best { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  #portada-marie-kids .pagefoot { padding: 10px 14px; flex-wrap: wrap; gap: 6px; }
+  #portada-marie-kids .pagefoot .contact { flex-wrap: wrap; }
+}
+
+
+/* ===== CAT-HEADER BOUTIQUE UNIFICADO ===== */
+.cat-header {
+  background: #f9f5f0 !important;
+  border: 1px solid #efe5d8 !important;
+  border-left: 4px solid #c97b84 !important;
+  border-bottom: 1px solid #efe5d8 !important;
+  padding: 14px 18px 10px !important;
+  text-align: left !important;
+}
+.cat-header::before {
+  display: none !important;
+}
+.cat-header .cat-code {
+  color: #c97b84 !important;
+  font-size: 9px !important;
+  letter-spacing: 2.5px !important;
+  font-weight: 700 !important;
+}
+.cat-header .cat-title {
+  color: #2c2018 !important;
+  font-family: "Playfair Display", serif !important;
+  font-size: 22px !important;
+}
+.cat-header .cat-eyebrow,
+.cat-header .cat-sub {
+  color: #7a6658 !important;
+}
+
+/* ===== PRODUCT GRIDS ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  flex: 1;
+  overflow: hidden;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 7px;
+  padding: 8px 12px;
+  flex: 1;
+  overflow: hidden;
+  align-content: stretch;
+}
+
+/* ===== PRODUCT CARD (2-col) ===== */
+.pcard {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ede3d8;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+.pcard .photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--warm);
+  flex-shrink: 0;
+  max-height: 310px;
+}
+.pcard .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pcard .info {
+  padding: 8px 11px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.pcard .pname {
+  font-family: "Playfair Display", serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.pcard .pmeta {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.pcard .prow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+.pcard .ptalla {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--rose);
+  background: var(--blush);
+  padding: 3px 9px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+.pcard .pprice-from {
+  font-size: 9px;
+  color: var(--muted);
+}
+.pcard .pprice {
+  font-family: "Playfair Display", serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--rose-dark);
+}
+
+/* ===== PRODUCT CARD (3-col) ===== */
+.pcard3 {
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ede3d8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+.pcard3 .photo3 {
+  overflow: hidden;
+  background: var(--warm);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+.pcard3 .photo3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.pcard3 .info3 {
+  padding: 5px 9px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  overflow: hidden;
+}
+.pcard3 .pname3 {
+  font-family: "Playfair Display", serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  /* AGREGAR ESTAS 3 LÍNEAS: */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.pcard3 .pmeta3 {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.pcard3 .prow3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 4px;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.pcard3 .ptalla3 {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--rose);
+  background: var(--blush);
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.pcard3 .pprice-from3 {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.pcard3 .pprice3 {
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rose-dark);
+}
+.pcard3 .pprice3.sold {
+  color: var(--sold);
+  font-size: 9px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+}
+
+/* ===== PÁGINA 8 — talla y precio en columna ===== */
+.prow3-v {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.prow3-v .ptalla3 {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--rose);
+  background: var(--blush);
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.prow3-v .pprice-from3 {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prow3-v .pprice3 {
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rose-dark);
+}
+
+/* ===== PALETA DE COLORES ===== */
+.color-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0;
+}
+.cdot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ===== SOCIAL STICKERS ===== */
+.social-stickers {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.sticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+}
+.sticker svg {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+.sticker:hover svg {
+  transform: scale(1.08);
+}
+.sticker span {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   DENIM CATALOG — layout premium estilo internacional
+   ===================================================
+   Uso: añadir clase "denim-page" a las páginas de jeans
+   y reemplazar grid3/pcard3 por grid-denim/card-denim
+   dentro de esas páginas.
+   =================================================== */
+
+/* --- Cabecera denim con acento azul índigo --- */
+.denim-page .cat-code {
+  color: #a8d4f5;
+}
+.denim-page .cat-eyebrow {
+  color: #7bbfe8;
+}
+.denim-page .cat-title {
+  color: #ffffff;
+}
+.denim-page .cat-sub {
+  color: #8fc8ed;
+}
+
+/* --- Grid denim: 2 columnas → imágenes grandes y bien centradas --- */
+.grid-denim {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  flex: 1;
+  overflow: hidden;
+  align-content: stretch;
+}
+
+/* Cuando hay 3 productos en página: 3 columnas --- */
+.grid-denim.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+/* --- Tarjeta denim --- */
+.card-denim {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dde8f2;
+  box-shadow: 0 2px 10px rgba(15, 46, 74, 0.1);
+  height: 100%;
+  position: relative;
+}
+
+/* Foto: crece para llenar espacio disponible, cover sin espacios blancos */
+.card-denim .photo-denim {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #eef3f8;
+  position: relative;
+}
+
+.card-denim .photo-denim img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Badge de código en esquina superior */
+.card-denim .badge-cod {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  background: rgba(15, 46, 74, 0.82);
+  color: #a8d4f5;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+/* Franja azul índigo debajo de la foto */
+.card-denim .photo-denim::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1a4a72 0%, #4a9edd 50%, #1a4a72 100%);
+}
+
+/* Info inferior */
+.card-denim .info-denim {
+  padding: 7px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.card-denim .pname-d {
+  font-family: "Playfair Display", serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0f2e4a;
+  line-height: 1.25;
+}
+
+.card-denim .pmeta-d {
+  font-size: 8.5px;
+  color: #4a6a85;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-denim .prow-d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 5px;
+  border-top: 1px solid #dde8f2;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.card-denim .ptalla-d {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #1a4a72;
+  background: #dde8f2;
+  padding: 3px 9px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.card-denim .pprice-from-d {
+  font-size: 9px;
+  color: #7a9bb5;
+  font-weight: 500;
+}
+.card-denim .pprice-d {
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a4a72;
+}
+
+/* Footer de página denim con tono oscuro */
+.denim-page .pagefoot {
+  background: #0f2e4a;
+  color: #7bbfe8;
+  border-top: none;
+}
+.denim-page .pagefoot .num {
+  color: #4a9edd;
+}
+
+/* ===== PRINT: denim cards también usan contain ===== */
+@media print {
+  .grid-denim {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    align-content: stretch !important;
+  }
+  .grid-denim.cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+  }
+  .card-denim {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .card-denim .photo-denim {
+    flex: 1 !important;
+    min-height: 0 !important;
+    aspect-ratio: unset !important;
+    height: auto !important;
+  }
+  .card-denim .photo-denim img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+}
+
+/* ===== RESPONSIVE MÓVIL: denim ===== */
+@media (max-width: 768px) {
+  .grid-denim,
+  .grid-denim.cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+  .card-denim {
+    height: auto !important;
+  }
+  .card-denim .photo-denim {
+    flex: 1 !important;
+    min-height: 120px !important;
+  }
+  .card-denim .pname-d {
+    font-size: 10px !important;
+  }
+  .card-denim .pmeta-d {
+    font-size: 8px !important;
+  }
+  .card-denim .pprice-d {
+    font-size: 13px !important;
+  }
+}
+
+/* ===== PRINT — fuerza A4 exacto, cancela responsive ===== */
+@media print {
+  body {
+    background: white;
+  }
+  .toolbar {
+    display: none !important;
+  }
+  .book-container {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+  .page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+  }
+  .cover,
+  .closing {
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    overflow: hidden !important;
+  }
+  .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+  }
+  .grid3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: 1fr !important;
+    gap: 7px !important;
+    padding: 8px 12px !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    align-content: stretch !important;
+  }
+  .grid4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  .pcard {
+    height: auto !important;
+  }
+  .pcard .photo {
+    aspect-ratio: 4/5 !important;
+    max-height: 310px !important;
+  }
+  .pcard .photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .pcard .pname {
+    font-size: 13px !important;
+  }
+  .pcard .pprice {
+    font-size: 17px !important;
+  }
+  .pcard3 {
+    height: 100% !important;
+  }
+  .pcard3 .photo3 {
+    flex: 1 !important;
+    min-height: 0 !important;
+    aspect-ratio: unset !important;
+  }
+  .grid3-p10 .pcard3 .photo3,
+  .grid3-p11 .pcard3 .photo3 {
+    flex: unset !important;
+    height: 350px !important;
+  }
+  .pcard3 .photo3 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .pcard3 .pname3 {
+    font-size: 11.5px !important;
+  }
+  .pcard3 .pprice3 {
+    font-size: 15px !important;
+  }
+  .cat-title {
+    font-size: 18px !important;
+  }
+  .steps {
+    flex-wrap: nowrap !important;
+  }
+  .contact-box {
+    flex-direction: row !important;
+  }
+  .closing h2 {
+    font-size: 28px !important;
+  }
+}
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE MÓVIL ===== */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 6px 12px !important;
+    flex-wrap: wrap !important;
+  }
+  .toolbar-hint {
+    display: none !important;
+  }
+  .toolbar-brand {
+    font-size: 12px !important;
+  }
+
+  .book-container {
+    padding: 8px 4px 24px !important;
+    margin-top: 52px !important;
+  }
+
+  /* Cada página se escala al ancho del celular */
+  .page {
+    width: 100vw !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    overflow: visible !important;
+  }
+
+  .cover,
+  .closing {
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+  }
+
+  /* Grids: 2 columnas en móvil */
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+    overflow: visible !important;
+    flex: unset !important;
+  }
+  .grid3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+    overflow: visible !important;
+    flex: unset !important;
+    grid-auto-rows: auto !important;
+    align-content: unset !important;
+  }
+  .grid4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  /* Tarjetas 2 col */
+  .pcard {
+    height: auto !important;
+  }
+  .pcard .photo {
+    aspect-ratio: 3/4 !important;
+    max-height: unset !important;
+  }
+  .pcard .photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .pcard .info {
+    padding: 6px 8px 8px !important;
+  }
+  .pcard .pname {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+  .pcard .pmeta {
+    font-size: 8px !important;
+  }
+  .pcard .pprice {
+    font-size: 13px !important;
+  }
+  .pcard .ptalla {
+    font-size: 7px !important;
+    padding: 2px 6px !important;
+  }
+
+  /* Tarjetas 3 col (se convierten en 2) */
+  .pcard3 {
+    height: auto !important;
+  }
+  .pcard3 .photo3 {
+    height: auto !important;
+    aspect-ratio: 3/4 !important;
+    width: 100% !important;
+  }
+  .pcard3 .photo3 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .pcard3 .info3 {
+    padding: 5px 7px 7px !important;
+  }
+  .pcard3 .pname3 {
+    font-size: 10px !important;
+  }
+  .pcard3 .pmeta3 {
+    font-size: 8px !important;
+  }
+  .pcard3 .pprice3 {
+    font-size: 13px !important;
+  }
+  .pcard3 .ptalla3 {
+    font-size: 7px !important;
+  }
+
+  /* Header categoría */
+  .cat-header {
+    padding: 8px 12px 6px !important;
+  }
+  .cat-title {
+    font-size: 14px !important;
+  }
+  .cat-sub,
+  .cat-eyebrow,
+  .cat-code {
+    font-size: 7px !important;
+  }
+
+  /* Cover */
+  .cover-inner {
+    padding: 16px 12px 0 !important;
+  }
+  .cover-tagline {
+    font-size: 10px !important;
+  }
+  .cover-contact {
+    font-size: 7px !important;
+  }
+
+  /* Closing */
+  .closing-inner {
+    padding: 20px 20px 0 !important;
+  }
+  .closing h2 {
+    font-size: 18px !important;
+  }
+  .closing .lede {
+    font-size: 9px !important;
+  }
+  .steps {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  .contact-box {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .contact-col {
+    min-width: 80px !important;
+    padding: 8px 12px !important;
+  }
+  .social-stickers {
+    gap: 10px !important;
+  }
+  .sticker svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+/* ===================================================
+   PÁGINA 8 — 3 cards que llenan toda la hoja
+   =================================================== */
+.page-full3 {
+  display: flex;
+  flex-direction: column;
+}
+.page-full3 .grid3 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  align-content: stretch;
+}
+.page-full3 .pcard3 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.page-full3 .photo3 {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.page-full3 .photo3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.page-full3 .info3 {
+  flex-shrink: 0;
+}
+
+/* ===================================================
+   PALETA DOBLE POR TALLA (páginas 9+10 fusionadas)
+   =================================================== */
+.talla-colors-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 4px 0 3px;
+}
+.tc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tc-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 0.04em;
+  min-width: 26px;
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   CARDS DENIM MÁS COMPACTAS — texto menor, menos padding
+   =================================================== */
+.card-denim .info-denim {
+  padding: 5px 8px 6px;
+  gap: 2px;
+}
+.card-denim .pname-d {
+  font-size: 10px;
+  line-height: 1.2;
+}
+.card-denim .pmeta-d {
+  font-size: 7.5px;
+  -webkit-line-clamp: 2;
+  line-height: 1.35;
+}
+.card-denim .prow-d {
+  padding-top: 4px;
+  margin-top: 3px;
+}
+.card-denim .ptalla-d {
+  font-size: 7px;
+  padding: 2px 7px;
+}
+.card-denim .pprice-from-d {
+  font-size: 8px;
+}
+.card-denim .pprice-d {
+  font-size: 13px;
+}
+
+/* Grid 2 cols denim: fotos más grandes */
+.grid-denim {
+  gap: 8px;
+  padding: 8px 12px;
+}
+.grid-denim.cols-3 {
+  gap: 7px;
+  padding: 7px 11px;
+}
+
+/* Cabecera denim más compacta */
+.denim-page .cat-header {
+  padding: 8px 16px 7px;
+}
+.denim-page .cat-title {
+  font-size: 18px;
+}
+.denim-page .cat-sub {
+  font-size: 9px;
+  margin-top: 2px;
+}
+
+/* ===================================================
+   PÁGINA NIÑO — layout foto + tabla de tallas/colores
+   =================================================== */
+.page-nino {
+  display: flex;
+  flex-direction: column;
+}
+
+.nino-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  min-height: 0;
+}
+
+.nino-card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dde8f2;
+  box-shadow: 0 2px 8px rgba(26, 46, 74, 0.1);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.nino-foto {
+  width: 42%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  background: #eef3f8;
+}
+.nino-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.nino-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26, 46, 74, 0.8);
+  color: #a8c8f0;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+
+.nino-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 10px 0;
+  gap: 4px;
+  min-width: 0;
+}
+.nino-nombre {
+  font-family: "Playfair Display", serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a2e4a;
+  line-height: 1.2;
+}
+.nino-desc {
+  font-size: 8.5px;
+  color: #4a6a8a;
+  line-height: 1.4;
+}
+.nino-precio {
+  font-size: 9px;
+  color: #1a2e4a;
+}
+.nino-precio .pprice3 {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
+}
+
+/* Tabla de tallas y colores */
+.talla-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: auto;
+  font-size: 8px;
+}
+.talla-table th,
+.talla-table td {
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid #dde8f2;
+  vertical-align: middle;
+}
+.talla-table th {
+  background: #1a2e4a;
+  color: #a8c8f0;
+  font-weight: 700;
+  font-size: 7.5px;
+  letter-spacing: 0.04em;
+}
+.talla-table td:first-child {
+  font-weight: 700;
+  color: #1a2e4a;
+  background: #eef3f8;
+  text-align: left;
+  white-space: nowrap;
+}
+.talla-table tbody tr:nth-child(even) td {
+  background: #f8fbff;
+}
+.talla-table tbody tr:nth-child(even) td:first-child {
+  background: #e4ecf5;
+}
+.talla-table td {
+  color: #1a2e4a;
+  font-weight: 600;
+}
+
+/* Mini punto de color en encabezado de tabla */
+.cdot-th {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media print {
+  .nino-layout {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    flex: 1 !important;
+  }
+  .nino-card {
+    height: 100% !important;
+  }
+  .nino-foto {
+    height: 100% !important;
+  }
+}
+
+/* ===================================================
+   PÁGINA CASACAS ÚNICA (niña + niño, tallas 2-3-4)
+   =================================================== */
+.page-casacas-all {
+  display: flex;
+  flex-direction: column;
+}
+.casacas-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px 4px;
+  gap: 4px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Títulos de sección niña / niño */
+.casacas-seccion-titulo {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  border-bottom: 1.5px solid #e0e0e0;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+
+/* Grid niña: 5 columnas */
+.casacas-grid-nina {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  flex: 1.6;
+  min-height: 0;
+}
+
+/* Grid niño: HONG + GOPENNIG (2 columnas, GOPENNIG más ancha) */
+.casacas-grid-nino {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Tarjeta base */
+.ccard {
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+.ccard-foto {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.ccard-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.ccard-info {
+  padding: 4px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.ccard-nombre {
+  font-family: "Playfair Display", serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
+}
+.ccard-desc {
+  font-size: 7px;
+  color: #666;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ccard-precio {
+  font-size: 8px;
+  color: #222;
+  margin-top: 1px;
+}
+.ccard-precio .pprice3 {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
+}
+
+/* Filas de tallas con colores */
+.ccard-tallas {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+.ct-fila {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.ct-tag {
+  font-size: 7px;
+  font-weight: 800;
+  color: #fff;
+  background: #444;
+  border-radius: 3px;
+  padding: 1px 4px;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+/* puntos más pequeños dentro de estas cards */
+.ccard-tallas .cdot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+/* Tarjeta niño: orientación horizontal */
+.ccard-nino {
+  flex-direction: row !important;
+}
+.ccard-nino .ccard-foto {
+  width: 38%;
+  flex-shrink: 0;
+  flex: none;
+}
+.ccard-nino .ccard-info {
+  flex: 1;
+  padding: 8px 10px;
+}
+
+/* GOPENNIG: 3 minifotografías en fila */
+.ccard-gopennig {
+  flex-direction: column !important;
+}
+.gopennig-fotos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  height: 52%;
+  flex-shrink: 0;
+}
+.gfoto-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.gfoto-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.gfoto-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 6.5px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 0;
+}
+.ccard-gopennig .ccard-info {
+  flex: 1;
+  padding: 6px 10px 8px;
+}
+
+/* Pares de colores GOPENNIG */
+.cdot-par {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-right: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px 3px;
+}
+
+@media print {
+  .casacas-grid-nina {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+  .casacas-grid-nino {
+    display: grid !important;
+    grid-template-columns: 1fr 2fr !important;
+  }
+  .ccard {
+    height: 100% !important;
+  }
+}
+
+/* ===================================================
+   OVERLAY PALETA DE COLORES POR TALLA — sobre la foto
+   =================================================== */
+.photo3 {
+  position: relative;
+}
+.color-tallas-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding: 14px 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cto-fila {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.cto-tag {
+  font-size: 6.5px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 3px;
+  padding: 1px 4px;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+.color-tallas-overlay .cdot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+/* Páginas con pocas cards — no estirar hasta el fondo */
+.grid3-compact {
+  align-content: start;
+  flex: unset;
+  height: auto;
+}
+
+.grid3-compact .pcard3 {
+  height: auto;
+}
+
+.grid3-compact .photo3 {
+  flex: unset;
+  aspect-ratio: 3/4;
+}
+
+/* === PÁGINAS CON POCAS CARDS (p10, p11, p12): foto altura fija para llenar hoja === */
+.grid3-p10 .pcard3 .photo3,
+.grid3-p11 .pcard3 .photo3,
+.grid3-p12 .pcard3 .photo3 {
+  flex: unset !important;
+  height: 350px !important;
+  overflow: hidden !important;
+}
+
+.grid3-p10 .pcard3 .photo3 img,
+.grid3-p11 .pcard3 .photo3 img,
+.grid3-p12 .pcard3 .photo3 img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+}
+
+
+/* ===== CAT-HEADER BOUTIQUE UNIFICADO - FIX FINAL 2026 ===== */
+.cat-header {
+  background: #f9f5f0 !important;
+  border: 1px solid #efe5d8 !important;
+  border-left: 4px solid #C97B84 !important;
+  border-bottom: 1px solid #efe5d8 !important;
+  padding: 14px 18px 10px !important;
+  text-align: left !important;
+  color: #2C2018 !important;
+}
+.cat-header::before { display: none !important; }
+.cat-header .cat-code { color: #C97B84 !important; font-size: 9px !important; letter-spacing: 2.5px !important; font-weight: 700 !important; }
+.cat-header .cat-title { color: #2C2018 !important; font-family: 'Playfair Display', serif !important; font-size: 22px !important; }
+.cat-header .cat-eyebrow, .cat-header .cat-sub { color: #7A6658 !important; }
+/* Mantener denim solo si realmente es pagina denim, pero en beige tambien para consistencia */
+.denim-page .cat-header { background: #f0ece6 !important; border-left-color: #5a7a9a !important; }
+.denim-page .cat-code { color: #5a7a9a !important; }
+.denim-page .cat-title { color: #2C2018 !important; }
+.denim-page .cat-eyebrow, .denim-page .cat-sub { color: #7A6658 !important; }
+
+
