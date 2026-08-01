@@ -792,12 +792,12 @@ body {
 .grid3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
+  grid-auto-rows: auto; /* cada fila mide solo lo que necesita */
   gap: 7px;
   padding: 8px 12px;
   flex: 1;
   overflow: hidden;
-  align-content: stretch;
+  align-content: start; /* las filas se acomodan arriba, el resto queda en blanco */
 }
 
 /* ===== PRODUCT CARD (2-col) ===== */
@@ -878,20 +878,20 @@ body {
   flex-direction: column;
   border: 1px solid #ede3d8;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  height: 100%;
+  height: auto; /* para que la tarjeta se ajuste al contenido y no quede más alta que la foto */
 }
 .pcard3 .photo3 {
   overflow: hidden;
   background: var(--warm);
-  flex: 1;
-  min-height: 0;
+  flex: none;
+  aspect-ratio: 15 / 16; /* tamaño fijo siempre, no depende de cuántas filas haya */
   width: 100%;
 }
 .pcard3 .photo3 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
   display: block;
 }
 .pcard3 .info3 {
@@ -1312,12 +1312,12 @@ body {
   .grid3 {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    grid-auto-rows: 1fr !important;
+    grid-auto-rows: auto !important;
     gap: 7px !important;
     padding: 8px 12px !important;
     flex: 1 !important;
     overflow: hidden !important;
-    align-content: stretch !important;
+    align-content: start !important;
   }
   .grid4 {
     grid-template-columns: repeat(4, 1fr) !important;
@@ -1341,12 +1341,11 @@ body {
     font-size: 17px !important;
   }
   .pcard3 {
-    height: 100% !important;
+    height: auto !important;
   }
   .pcard3 .photo3 {
-    flex: 1 !important;
-    min-height: 0 !important;
-    aspect-ratio: unset !important;
+    flex: none !important;
+    aspect-ratio: 15/ 16 !important;
   }
   .grid3-p10 .pcard3 .photo3,
   .grid3-p11 .pcard3 .photo3 {
@@ -2118,7 +2117,7 @@ body {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center top !important;
+  object-position: center center !important;
   display: block !important;
 }
 

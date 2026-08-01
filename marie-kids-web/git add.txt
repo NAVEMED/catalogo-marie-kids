@@ -1,3 +1,5 @@
+git init
 git add -A
-git commit -m lo que cambiaste
+git commit -m "actualización de Datos"
+
 git push
